@@ -1,6 +1,7 @@
 package com.doit.Controller;
 
 import com.doit.Domain.User;
+import com.doit.Exceptions.HandleException;
 import com.doit.Repository.UserDetailsRepository;
 import com.doit.Repository.UserRepository;
 import com.doit.Service.UseService;
@@ -55,12 +56,12 @@ public class UserController {
        return user;
     }
 
-
     @RequestMapping(value = "/usr",method = RequestMethod.POST)
     public User getByLogin(@RequestParam String username){
         User user1= useService.findByUsername(username);
+        if((user1.getUsername().equals(username)))
         return user1;
-
+        else throw new HandleException();
     }
 //    @RequestMapping(value = "/val",method = RequestMethod.POST)
 //    @ResponseBody
