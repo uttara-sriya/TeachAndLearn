@@ -49,14 +49,18 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value = "/byUser/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byUser", method = RequestMethod.POST)
     public User getByUsername(@PathVariable(value = "username") String username){
         User user= useService.findByUsername(username);
-        if(user.getUsername()!=null && user.getPassword()!=null){
-            return user;
-        }else{
-            return null;
-        }
+       return user;
+    }
+
+
+    @RequestMapping(value = "/usr",method = RequestMethod.POST)
+    public User getByLogin(@RequestParam String username){
+        User user1= useService.findByUsername(username);
+        return user1;
+
     }
 //    @RequestMapping(value = "/val",method = RequestMethod.POST)
 //    @ResponseBody
